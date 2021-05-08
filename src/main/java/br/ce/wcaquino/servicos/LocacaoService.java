@@ -24,21 +24,27 @@ public class LocacaoService {
 		}
 		
 		Locacao locacao = new Locacao();
+		Double valorTotal = 0d;
 		
-		for(Filme f : filmes) {	
-			
+		for(int i = 0; i < filmes.size(); i++) {
+			Filme f = filmes.get(i);
+			Double valorFilme = f.getPrecoLocacao();
 			if(f.getEstoque() == 0) {
 				throw new FilmeSemEstoqueException();
 			}
-			
-			Double valorTotal = 0d;
-			valorTotal += f.getPrecoLocacao();
+			switch(i) {
+				case 2: valorFilme = valorFilme * 0.75; break;
+				case 3: valorFilme = valorFilme * 0.50; break;
+				case 4: valorFilme = valorFilme * 0.25; break;
+				case 5: valorFilme = 0d; break;
+			}
 
-			locacao.setFilme(filmes);
-			locacao.setUsuario(usuario);
-			locacao.setDataLocacao(new Date());
-			locacao.setValor(valorTotal);
+			valorTotal += valorFilme;
 		}
+		locacao.setFilme(filmes);
+		locacao.setUsuario(usuario);
+		locacao.setDataLocacao(new Date());
+		locacao.setValor(valorTotal);
 
 		//Entrega no dia seguinte
 		Date dataEntrega = new Date();

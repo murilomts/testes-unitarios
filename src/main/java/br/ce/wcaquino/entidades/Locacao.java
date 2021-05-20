@@ -38,7 +38,7 @@ public class Locacao {
 	public List<Filme> getFilme() {
 		return filmes;
 	}
-	public void setFilme(List<Filme> filme) {
+	public void setFilmes(List<Filme> filme) {
 		this.filmes = filme;
 	}
 
